@@ -29,5 +29,6 @@ src/python/_vars.py: src/python/libsmbios_c/_vars.py  configure Makefile config.
 	cp $< $@
 	for var in $(REPLACE_VARS)	;\
 	do	\
-		perl -p -i -e "s|^$$var\s*=.*|$$var=\"$${!var}\"|"  $@;\
+		eval "value=\$$$$var"; \
+		perl -p -i -e "s|^$$var\s*=.*|$$var=\"$$value\"|"  $@;\
 	done
